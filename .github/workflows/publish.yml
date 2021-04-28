@@ -25,15 +25,16 @@ jobs:
       run: |
         SCRIPTS=$(find main/install -type f -name "*.sh")
 
-        TARGET=gh-pages/install
-        if [ -d "${TARGET}" ]; then
-          rm -rf "${TARGET}"
-        fi
-        mkdir "${TARGET}"
+        # TARGET=gh-pages/install
+        # if [ -d "${TARGET}" ]; then
+        #   rm -rf "${TARGET}"
+        # fi
 
         for SCRIPT in ${SCRIPTS}
         do
-          cp "${SCRIPT}" "${TARGET}"
+          SUBSCRIPT=$(sed 's/main\/install//')
+          echo ${SUBSCRIPT}
+          # cp "${SCRIPT}" gh-pages
         done
 
     - name: Deploy new scripts to GitHub Pages branch
