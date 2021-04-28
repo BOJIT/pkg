@@ -33,9 +33,12 @@ jobs:
         for SCRIPT in ${SCRIPTS}
         do
           echo ${SCRIPT}
-          SUBSCRIPT=$(echo ${SCRIPT} | sed 's/main\/install//')
+          SUBSCRIPT=$(echo ${SCRIPT} | sed 's/main\/install\///')
           echo ${SUBSCRIPT}
-          # cp "${SCRIPT}" gh-pages
+          if [ -f "gh-pages/${SCRIPT}" ]; then
+            rm "gh-pages/${SCRIPT}"
+          fi
+           cp "${SCRIPT}" gh-pages
         done
 
     - name: Deploy new scripts to GitHub Pages branch
