@@ -1,7 +1,5 @@
 name: publish
 
-description: Publish install scripts and packages to GitHub Pages branch
-
 on:
   push:
     branches:
