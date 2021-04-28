@@ -36,8 +36,9 @@ jobs:
           cp "${SCRIPT}" "${TARGET}"
         done
 
-    - name: ls
-      run: ls -al gh-pages/install
+    - name: Deploy new scripts to GitHub Pages branch
+      run: |
+        echo ${{ github.repository }}
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
