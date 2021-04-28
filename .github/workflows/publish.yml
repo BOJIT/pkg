@@ -36,9 +36,6 @@ jobs:
           cp "${SCRIPT}" gh-pages
         done
 
-    - name: ls
-      run: ls -al gh-pages
-
     - name: Deploy new scripts to GitHub Pages branch
       run: |
         git config --global user.name "github-actions[bot]"
@@ -48,7 +45,7 @@ jobs:
 
         git -C gh-pages add -A
         git -C gh-pages commit -m "Deploy: ${HASH}"
-        git -c gh-pages push
+        git -C gh-pages push
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
