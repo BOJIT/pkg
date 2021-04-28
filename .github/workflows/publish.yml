@@ -36,6 +36,9 @@ jobs:
           cp "${SCRIPT}" gh-pages
         done
 
+    - name: ls
+      run: ls -al gh-pages
+
     - name: Deploy new scripts to GitHub Pages branch
       run: |
         git config --global user.name "github-actions[bot]"
