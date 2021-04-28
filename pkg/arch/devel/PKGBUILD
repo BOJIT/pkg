@@ -1,12 +1,12 @@
-# Maintainer: Michael Daffin <michael@daffin.io>
-pkgname=mdaffin-devel
-pkgver=36
+# Maintainer: James Bennion-Pedley (james@bojit.dev)
+pkgname=bojit-devel
+pkgver=1
 pkgrel=1
 pkgdesc="System config for mdaffin systems"
 arch=(any)
-url="https://github.com/mdaffin/arch-repo"
+url="https://github.com/bojit/pkg"
 license=(MIT)
-groups=(mdaffin)
+groups=(bojit)
 
 conflicts=(repose)
 replaces=(mdaffin-devel-embedded mdaffin-devel-languages mdaffin-devel-virtualisation mdaffin-arch-repo)

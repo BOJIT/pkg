@@ -54,6 +54,8 @@ jobs:
       image: archlinux:latest
 
     steps:
+    - name: Install build dependencies
+      run: makepkg
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
@@ -64,7 +66,5 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: ls
-      run: ls
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"

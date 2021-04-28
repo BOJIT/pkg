@@ -1,6 +1,6 @@
 # Maintainer: James Bennion-Pedley (james@bojit.dev)
 pkgname=bojit-base
-pkgver=37
+pkgver=1
 pkgrel=1
 pkgdesc="System config for BOJIT systems"
 arch=(any)
@@ -11,7 +11,7 @@ groups=(bojit)
 provides=(vim vi)
 conflicts=(vim vi)
 replaces=(vim vi)
-install=mdaffin-base.install
+install=bojit-base.install
 
 # Base packages
 depends=(base linux linux-firmware man-db man-pages texinfo intel-ucode)
