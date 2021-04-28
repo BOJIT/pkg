@@ -1,7 +1,30 @@
----
-
 name: publish
-description: Publish
-runs:
-  using: docker
-  image: Dockerfile
+
+description: Publish install scripts and packages to GitHub Pages branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    name: Copy install shell scripts to GitHub Pages branch
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@main
+    - name: Copy Install Shell Scripts
+      run: echo 'Hello World!'
+
+  arch-pkg:
+    name: Build Arch Linux packages and copy to GitHub Pages branch
+    runs-on: ubuntu-18.04
+    container:
+      image: Dockerfile
+
+
+# runs:
+#   using: docker
+#   image: Dockerfile
