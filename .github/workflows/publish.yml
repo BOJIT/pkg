@@ -23,16 +23,17 @@ jobs:
         path: gh-pages
     - name: Synchronise shell scripts
       run: |
-        SCRIPTS=$(find main/install -type f -name "*.sh")
+        OLDSCRIPTS=$(find gh-pages -type f -name "*.sh")
 
-        for SCRIPT in ${SCRIPTS}
+        NEWSCRIPTS=$(find main/install -type f -name "*.sh")
+
+        for SCRIPT in ${OLDSCRIPTS}
         do
-          SUBSCRIPT=$(echo ${SCRIPT} | sed 's/main\/install\///')
+          rm "${SCRIPT}"
+        done
 
-          if [ -f "gh-pages/${SCRIPT}" ]; then
-            rm "gh-pages/${SCRIPT}"
-          fi
-
+        for SCRIPT in ${NEWSCRIPTS}
+        do
           cp "${SCRIPT}" gh-pages
         done
 
