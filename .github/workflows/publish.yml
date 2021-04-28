@@ -25,10 +25,11 @@ jobs:
     steps:
     - name: Checkout main branch
       uses: actions/checkout@main
+      with:
+        path: main
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@gh-pages
+      with:
+        path: gh-pages
     - name: Get list of packages that have changed
       run: find pkg/arch -type f -name "PKGBUILD"
-
-
-# runs:
-#   using: docker
-#   image: Dockerfile
