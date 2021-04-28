@@ -12,7 +12,15 @@ jobs:
 
     steps:
     - name: Checkout main branch
-      uses: actions/checkout@main
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        path: main
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        path: gh-pages
     - name: Copy Install Shell Scripts
       run: find install -type f -name "*.sh"
 
@@ -24,12 +32,14 @@ jobs:
 
     steps:
     - name: Checkout main branch
-      uses: actions/checkout@main
+      uses: actions/checkout@v2
       with:
+        ref: main
         path: main
     - name: Checkout gh-pages branch
-      uses: actions/checkout@gh-pages
+      uses: actions/checkout@v2
       with:
+        ref: gh-pages
         path: gh-pages
     - name: Get list of packages that have changed
       run: find pkg/arch -type f -name "PKGBUILD"
