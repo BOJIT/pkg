@@ -21,10 +21,10 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: ls
-      run: ls
-    # - name: Copy Install Shell Scripts
-    #   run: find install -type f -name "*.sh"
+    - name: Copy Install Shell Scripts
+      run: |
+        SCRIPTS=find main/install -type f -name "*.sh"
+        echo $SCRIPTS
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
