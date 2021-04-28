@@ -14,7 +14,7 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@main
     - name: Copy Install Shell Scripts
-      run: echo 'Hello World!'
+      run: ls
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
@@ -25,6 +25,8 @@ jobs:
     steps:
     - name: Checkout main branch
       uses: actions/checkout@main
+    - name: Get list of packages that have changed
+      run: ls
 
 
 # runs:
