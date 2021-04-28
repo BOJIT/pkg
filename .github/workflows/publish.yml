@@ -1,0 +1,7 @@
+---
+
+name: publish
+description: Publish
+runs:
+  using: docker
+  image: Dockerfile
