@@ -32,7 +32,7 @@ jobs:
 
         for SCRIPT in ${SCRIPTS}
         do
-          ECHO ${SCRIPT}
+          echo ${SCRIPT}
           SUBSCRIPT=$(echo ${SCRIPT} | sed 's/main\/install//')
           echo ${SUBSCRIPT}
           # cp "${SCRIPT}" gh-pages
