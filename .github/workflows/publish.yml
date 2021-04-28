@@ -21,8 +21,10 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: Copy Install Shell Scripts
-      run: find install -type f -name "*.sh"
+    - name: ls
+      run: ls
+    # - name: Copy Install Shell Scripts
+    #   run: find install -type f -name "*.sh"
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
@@ -41,5 +43,7 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: Get list of packages that have changed
-      run: find pkg/arch -type f -name "PKGBUILD"
+    - name: ls
+      run: ls
+    # - name: Get list of packages that have changed
+    #   run: find pkg/arch -type f -name "PKGBUILD"
