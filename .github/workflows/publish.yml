@@ -21,18 +21,23 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
-    - name: Copy Install Shell Scripts
+    - name: Synchronise shell scripts
       run: |
         SCRIPTS=$(find main/install -type f -name "*.sh")
-        echo ${SCRIPTS}
 
         TARGET=gh-pages/install
-        if [ -d "${TARGET}"]; then
+        if [ -d "${TARGET}" ]; then
           rm -rf "${TARGET}"
         fi
         mkdir "${TARGET}"
+
+        for SCRIPT in ${SCRIPTS}
+        do
+          cp "${SCRIPT}" "${TARGET}"
+        done
+
     - name: ls
-      run: ls -al gh-pages
+      run: ls -al gh-pages/install
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
