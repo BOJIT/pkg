@@ -25,7 +25,14 @@ jobs:
       run: |
         SCRIPTS=$(find main/install -type f -name "*.sh")
         echo ${SCRIPTS}
-        [ -d "gh-pages/install" ] && rm -rf gh-pages/install
+
+        TARGET=gh-pages/install
+        if [ -d "${TARGET}"]; then
+          rm -rf "${TARGET}"
+        fi
+        mkdir "${TARGET}"
+    - name: ls
+      run: ls -al gh-pages
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
