@@ -25,21 +25,19 @@ jobs:
       run: |
         SCRIPTS=$(find main/install -type f -name "*.sh")
 
-        # TARGET=gh-pages/install
-        # if [ -d "${TARGET}" ]; then
-        #   rm -rf "${TARGET}"
-        # fi
-
         for SCRIPT in ${SCRIPTS}
         do
-          echo ${SCRIPT}
           SUBSCRIPT=$(echo ${SCRIPT} | sed 's/main\/install\///')
-          echo ${SUBSCRIPT}
+
           if [ -f "gh-pages/${SCRIPT}" ]; then
             rm "gh-pages/${SCRIPT}"
           fi
-           cp "${SCRIPT}" gh-pages
+
+          cp "${SCRIPT}" gh-pages
         done
+
+    - name: ls
+      run: ls -al gh-pages
 
     - name: Deploy new scripts to GitHub Pages branch
       run: |
@@ -49,7 +47,8 @@ jobs:
         HASH=$(git -C main rev-parse --short HEAD)
 
         git -C gh-pages add -A
-        echo ${HASH}
+        git -C gh-pages commit -m "Deploy: ${HASH}"
+        git -c gh-pages push
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
