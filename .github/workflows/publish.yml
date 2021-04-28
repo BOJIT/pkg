@@ -59,7 +59,7 @@ jobs:
 
     steps:
     - name: Install build dependencies
-      run: makepkg
+      run: pacman -Sy binutils fakeroot sudo --noconfirm --needed
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
@@ -70,5 +70,7 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
+    - name: Build packages
+      run: sudo -u nobody makepkg
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"
