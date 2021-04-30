@@ -46,8 +46,7 @@ jobs:
 
         HASH=$(git -C main rev-parse --short HEAD)
 
-        if ! [ git -C gh-pages diff-index --quiet HEAD -- ]
-        then
+        if [ $(git -C gh-pages diff --stat) == '' ]; then
           git -C gh-pages add -A
           git -C gh-pages commit -m "Deploy Install Scripts: ${HASH}"
           git -C gh-pages push
@@ -66,12 +65,8 @@ jobs:
     - name: Create non-root user that can build the packages
       run: |
         useradd -m non_root
-
         echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-
-        # cat /etc/sudoers
-        # mkdir /home/non_root
-        # chown -R non_root /home/non_root
+        su non_root
 
     - name: Checkout main branch
       uses: actions/checkout@v2
@@ -84,6 +79,12 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
+
+    - name: test ls pwd
+      run: |
+        ls -al
+        pwd
+        echo $BUILDDIR
 
     - name: Build packages
       run: sudo -u non_root makepkg
