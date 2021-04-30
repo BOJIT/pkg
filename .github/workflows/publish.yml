@@ -66,7 +66,6 @@ jobs:
       run: |
         useradd -m non_root
         echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-        su non_root
 
     - name: Checkout main branch
       uses: actions/checkout@v2
@@ -89,6 +88,8 @@ jobs:
 
     - name: Build packages
       run: |
+        cat /usr/local/etc/makepkg.conf
+        cd main/pkg/arch/base
         ls -al
         makepkg
     # - name: Get list of packages that have changed
