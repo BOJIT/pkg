@@ -65,10 +65,11 @@ jobs:
 
     - name: Create non-root user that can build the packages
       run: |
-        cat /etc/sudoers
         echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+
+        cat /etc/sudoers
         mkdir /home/non_root
-        chown -R non_root:non_root /home/non_root
+        chown -R non_root /home/non_root
 
     - name: Checkout main branch
       uses: actions/checkout@v2
