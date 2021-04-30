@@ -88,6 +88,8 @@ jobs:
         cd main/pkg/arch/base
 
     - name: Build packages
-      run: sudo -u non_root makepkg
+      run: |
+        ls -al
+        makepkg
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"
