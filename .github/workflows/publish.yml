@@ -88,7 +88,7 @@ jobs:
 
     - name: Build packages
       run: |
-        #cat /usr/local/etc/makepkg.conf
+        chown non_root: main/pkg/arch/base
         cd main/pkg/arch/base
         ls -al
         sudo -u non_root makepkg -s
