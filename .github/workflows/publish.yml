@@ -46,9 +46,14 @@ jobs:
 
         HASH=$(git -C main rev-parse --short HEAD)
 
-        git -C gh-pages add -A
-        git -C gh-pages commit -m "Deploy Install Scripts: ${HASH}"
-        git -C gh-pages push
+        git -C gh-pages diff-index --refresh
+
+        if git -C gh-pages diff-index --quiet HEAD
+        then
+          git -C gh-pages add -A
+          git -C gh-pages commit -m "Deploy Install Scripts: ${HASH}"
+          git -C gh-pages push
+        fi
 
   arch-pkg:
     name: Build Arch Linux packages and copy to GitHub Pages branch
@@ -63,7 +68,8 @@ jobs:
     - name: Create non-root user that can build the packages
       run: |
         cat /etc/sudoers
-        "echo 'non_root ALL=NOPASSWD: ALL' >> /etc/sudoers"
+        tee
+        echo 'non_root ALL=NOPASSWD: ALL' >> /etc/sudoers
         mkdir /home/non_root
         chown -R non_root:non_root /home/non_root
 
