@@ -16,11 +16,13 @@ jobs:
       with:
         ref: main
         path: main
+
     - name: Checkout gh-pages branch
       uses: actions/checkout@v2
       with:
         ref: gh-pages
         path: gh-pages
+
     - name: Synchronise shell scripts
       run: |
         OLDSCRIPTS=$(find gh-pages -type f -name "*.sh")
@@ -37,9 +39,6 @@ jobs:
           cp "${SCRIPT}" gh-pages
         done
 
-    - name: ls
-      run: ls -al gh-pages
-
     - name: Deploy new scripts to GitHub Pages branch
       run: |
         git config --global user.name "github-actions[bot]"
@@ -48,7 +47,7 @@ jobs:
         HASH=$(git -C main rev-parse --short HEAD)
 
         git -C gh-pages add -A
-        git -C gh-pages commit -m "Deploy: ${HASH}"
+        git -C gh-pages commit -m "Deploy Install Scripts: ${HASH}"
         git -C gh-pages push
 
   arch-pkg:
@@ -60,17 +59,26 @@ jobs:
     steps:
     - name: Install build dependencies
       run: pacman -Sy binutils fakeroot sudo --noconfirm --needed
+
+    - name: Create non-root user that can build the packages
+      run: |
+        "echo 'non_root ALL=NOPASSWD: ALL' >> /etc/sudoers"
+        mkdir /home/non_root
+        chown -R non_root:non_root /home/non_root
+
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
         ref: main
         path: main
+
     - name: Checkout gh-pages branch
       uses: actions/checkout@v2
       with:
         ref: gh-pages
         path: gh-pages
+
     - name: Build packages
-      run: sudo -u nobody makepkg
+      run: sudo -u non_root makepkg
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"
