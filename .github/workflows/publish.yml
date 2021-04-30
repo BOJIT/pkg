@@ -88,6 +88,7 @@ jobs:
 
     - name: Build packages
       run: |
+        su non_root
         #cat /usr/local/etc/makepkg.conf
         cd main/pkg/arch/base
         ls -al
