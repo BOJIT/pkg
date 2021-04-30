@@ -46,7 +46,7 @@ jobs:
 
         HASH=$(git -C main rev-parse --short HEAD)
 
-        if [ $(git -C gh-pages diff --stat) == '' ]; then
+        if [[ $(git -C gh-pages diff --stat) == '' ]]; then
           git -C gh-pages add -A
           git -C gh-pages commit -m "Deploy Install Scripts: ${HASH}"
           git -C gh-pages push
@@ -85,6 +85,7 @@ jobs:
         ls -al
         pwd
         echo $BUILDDIR
+        cd gh-pages/pkg/base
 
     - name: Build packages
       run: sudo -u non_root makepkg
