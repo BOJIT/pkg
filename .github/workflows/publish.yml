@@ -91,6 +91,6 @@ jobs:
         chown non_root: main/pkg/arch/base
         cd main/pkg/arch/base
         ls -al
-        sudo -u non_root makepkg -s
+        sudo -u non_root makepkg -f -c
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"
