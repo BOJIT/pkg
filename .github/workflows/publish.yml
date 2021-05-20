@@ -60,7 +60,7 @@ jobs:
 
     steps:
     - name: Build Arch Linux Packages
-      uses: BOJIT/makepkg
+      uses: BOJIT/makepkg@main
       with:
         src: 'hello'
         dest: 'world'
