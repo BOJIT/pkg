@@ -59,13 +59,16 @@ jobs:
       image: archlinux:latest
 
     steps:
-    - name: Install build dependencies
-      run: pacman -Sy binutils fakeroot sudo --noconfirm --needed
+    - name: Build Arch Linux Packages
+      uses: BOJIT/makepkg
+      with:
+        src: 'hello'
+        dest: 'world'
 
-    - name: Create non-root user that can build the packages
-      run: |
-        useradd -m non_root
-        echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+    # - name: Create non-root user that can build the packages
+    #   run: |
+    #     useradd -m non_root
+    #     echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
     - name: Checkout main branch
       uses: actions/checkout@v2
@@ -79,18 +82,18 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
-    - name: test ls pwd
-      run: |
-        ls -al
-        pwd
-        echo $BUILDDIR
-        cd main/pkg/arch/base
+    # - name: test ls pwd
+    #   run: |
+    #     ls -al
+    #     pwd
+    #     echo $BUILDDIR
+    #     cd main/pkg/arch/base
 
-    - name: Build packages
-      run: |
-        chown non_root: main/pkg/arch/base
-        cd main/pkg/arch/base
-        ls -al
-        sudo -u non_root makepkg -f -c
+    # - name: Build packages
+    #   run: |
+    #     chown non_root: main/pkg/arch/base
+    #     cd main/pkg/arch/base
+    #     ls -al
+    #     sudo -u non_root makepkg -f -c
     # - name: Get list of packages that have changed
     #   run: find pkg/arch -type f -name "PKGBUILD"
