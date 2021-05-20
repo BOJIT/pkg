@@ -68,7 +68,7 @@ jobs:
     # - name: Create non-root user that can build the packages
     #   run: |
     #     useradd -m non_root
-    #     echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+    #     echo 'non_root ALL=NOPASSWD: ALL' | sudo EDITOR='tee -a'  visudo
 
     - name: Checkout main branch
       uses: actions/checkout@v2
